@@ -1,8 +1,8 @@
 # ProyectoWeb_2
 
 ## Front End
-### npm install    |
-### npm install -g @vue/cli    |
+### npm install    
+### npm install -g @vue/cli    
 ### npm run serve (para ver el app)
 
 
