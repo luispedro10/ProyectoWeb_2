@@ -1,10 +1,28 @@
 <template>
-    <h1>Esta es la pagina de detalles</h1>
-  </template>
+  <div id="page-wrap">
+    <div id="img-wrap">
+      <img v-bind:src="product.imageUrl" />
+    </div>
+    <div id="product-details">
+      <h1>{{ product.name }}</h1>
+      <h3 id="price">${{ product.price }}</h3>
+      <p>Calificación Promedio: {{ product.averageRating }}</p>
+      <button id="add-to-cart">Agregar Al Carrito</button>
+      <h4>Descripción</h4>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+</template>
   
   <script>
-export default {
+  import {products} from '../datos';
+  export default {
     name: 'ProductDetailPage',
+    data() {
+      return {
+        product: products.find((p) => p.id === this.$route.params.id),
+      };
+    }
 };
 </script>
 

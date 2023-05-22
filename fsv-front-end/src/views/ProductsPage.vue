@@ -18,7 +18,7 @@
   </template>
   
   <script>
-  import { products } from '../fake-data';
+  import { products } from '../datos';
   
   export default {
       name: 'ProductsPage',
