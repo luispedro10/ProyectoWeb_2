@@ -1,10 +1,34 @@
 <template>
-    <h1>Este es el carrito</h1>
-  </template>
+  <div id="page-wrap">
+    <h1>Carrito</h1>
+    <ProductsList :products="cartItems"/>
+    <h3 id="total-price">Total: ${{ totalPrice }}</h3>
+    <button id="checkout-button">Comprar</button>
+  </div>
+</template>
   
-  <script>
+<script>
+import { cartItems } from '../datos';
+import ProductsList from '../components/ProductsList.vue';
+
 export default {
     name: 'CartPage',
+    components: {
+      ProductsList,
+    },
+    data() {
+      return {
+        cartItems,
+      }
+    },
+    computed: {
+      totalPrice() {
+        return this.cartItems.reduce(
+          (sum, item) => sum + Number(item.price),
+          0,
+        );
+      }
+    }
 };
 </script>
 

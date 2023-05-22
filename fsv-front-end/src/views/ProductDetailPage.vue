@@ -25,7 +25,6 @@
     }
 };
 </script>
-
 <style scoped>
   #page-wrap {
     margin-top: 16px;

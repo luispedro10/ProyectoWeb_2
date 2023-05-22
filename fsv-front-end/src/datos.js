@@ -102,5 +102,5 @@ export const products = [{
 export const cartItems = [
   products[0],
   products[2],
-  products[3],
+  products[7],
 ];
