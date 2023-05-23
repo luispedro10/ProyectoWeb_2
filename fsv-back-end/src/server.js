@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
-export const products = [{
+const products = [{
     id: '1',
     name: 'Adidas Busenitz',
     price: '799',
@@ -95,27 +95,44 @@ export const products = [{
     products[7],
   ];
 
-const app = express();
-app.use(bodyParser.json());
-
-app.get('/api/products', (req, res) => {
-    res.status(200).json(products);
-});
-
-app.get('/api/users/:userId/cart', (req, res) => {
-    res.status(200).json(cartItems);
-});
-
-app.get('/api/products/:productId', (req, res) => {
-    const { productId } = req.params;
-    const product = products.find((product) => product.id === productId);
+  const app = express();
+  app.use(bodyParser.json());
+  
+  app.get('/api/products', (req, res) => {
+      res.status(200).json(products);
+  });
+  
+  app.get('/api/users/:userId/cart', (req, res) => {
+      res.status(200).json(cartItems);
+  });
+  
+  app.get('/api/products/:productId', (req, res) => {
+      const { productId } = req.params;
+      const product = products.find((product) => product.id === productId);
+      if (product) {
+          res.status(200).json(product);
+      } else {
+          res.status(404).json('No se encontro el producto');
+      }
+  });
+  
+  app.post('/api/users/:userId/cart', (req, res) => {
+    const { productId } = req.body;
+    const product = products.find(product => product.id === productId);
     if (product) {
-        res.status(200).json(product);
+      cartItems.push(product);
+      res.status(200).json(cartItems);
     } else {
-        res.status(404).json('Producto no encontrado');
+      res.status(404).json('No se encontro el producto');
     }
-})
-
-app.listen(8000, () => {
-    console.log('Server is listening on port 8000');
-});
+  });
+  
+  app.delete('/api/users/:userId/cart/:productId', (req, res) => {
+    const { productId } = req.params;
+    cartItems = cartItems.filter(product => product.id !== productId);
+    res.status(200).json(cartItems);
+  });
+  
+  app.listen(8000, () => {
+      console.log('Server is listening on port 8000');
+  });
