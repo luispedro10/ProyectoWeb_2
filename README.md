@@ -10,4 +10,5 @@
 ### npm install xpress
 ### npm install --save-dev @babel/core @babel/node @babel/preset-env @babel/cli @babel/plugin-transform-runtime
 ### npm install @babel/runtime
-### npx babel-node src/server.js (para ver el app)
+### npx babel-node src/server.js (para lanzar el server)
+### npm install body-parser
