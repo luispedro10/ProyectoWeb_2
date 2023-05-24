@@ -12,3 +12,4 @@
 ### npm install @babel/runtime
 ### npx babel-node src/server.js (para lanzar el server)
 ### npm install body-parser
+### npm install --save-dev nodemon

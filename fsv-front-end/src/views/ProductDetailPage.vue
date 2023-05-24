@@ -1,30 +1,76 @@
 <template>
-  <div id="page-wrap">
+  <div id="page-wrap" v-if="product">
     <div id="img-wrap">
       <img v-bind:src="product.imageUrl" />
     </div>
     <div id="product-details">
       <h1>{{ product.name }}</h1>
-      <h3 id="price">${{ product.price }}</h3>
-      <p>Calificación Promedio: {{ product.averageRating }}</p>
-      <button id="add-to-cart">Agregar Al Carrito</button>
-      <h4>Descripción</h4>
+      <h3 id="price">Q{{ product.price }}</h3>
+      <p>Puntaje Promedio: {{ product.averageRating }}</p>
+      <button
+        id="add-to-cart"
+        v-if="!itemIsInCart && !showSuccessMessage"
+        v-on:click="addToCart"
+      >Añadir al carrito</button>
+      <button
+        id="add-to-cart"
+        class="green-button"
+        v-if="!itemIsInCart && showSuccessMessage"
+      >Añadido correctamente!</button>
+      <button
+        id="add-to-cart"
+        class="grey-button"
+        v-if="itemIsInCart"
+      >Este producto ya está en el carrito</button>
+      <h4>Descripcion</h4>
       <p>{{ product.description }}</p>
     </div>
   </div>
+  <NotFoundPage v-else/>
 </template>
   
-  <script>
-  import {products} from '../datos';
-  export default {
+<script>
+import axios from 'axios';
+import NotFoundPage from './NotFoundPage';
+
+export default {
     name: 'ProductDetailPage',
+    components: {
+      NotFoundPage,
+    },
     data() {
       return {
-        product: products.find((p) => p.id === this.$route.params.id),
+        product: {},
+        cartItems: [],
+        showSuccessMessage: false,
       };
+    },
+    computed: {
+      itemIsInCart() {
+        return this.cartItems.some(item => item.id === this.product.id);
+      }
+    },
+    methods: {
+      async addToCart() {
+        await axios.post('/api/users/12345/cart', {
+          productId: this.$route.params.id,
+        });
+        this.showSuccessMessage = true;
+        setTimeout(() => {
+          this.$router.push('/products');
+        }, 1500);
+      },
+    },
+    async created() {
+      const { data: product } = await axios.get(`/api/products/${this.$route.params.id}`);
+      this.product = product;
+
+      const { data: cartItems } = await axios.get('/api/users/12345/cart');
+      this.cartItems = cartItems;
     }
 };
 </script>
+
 <style scoped>
   #page-wrap {
     margin-top: 16px;
@@ -54,6 +100,12 @@
     top: 24px;
     right: 16px;
   }
-</style>
 
-  
+  .green-button {
+    background-color: green;
+  }
+
+  .grey-button {
+    background-color: #888;
+  }
+</style>

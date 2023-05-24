@@ -1,14 +1,16 @@
 <template>
   <div id="page-wrap">
     <h1>Carrito</h1>
-    <ProductsList :products="cartItems"/>
-    <h3 id="total-price">Total: ${{ totalPrice }}</h3>
+    <ProductsList
+      :products="cartItems"
+      v-on:remove-from-cart="removeFromCart($event)"/>
+    <h3 id="total-price">Total: Q{{ totalPrice }}</h3>
     <button id="checkout-button">Comprar</button>
   </div>
 </template>
-  
+
 <script>
-import { cartItems } from '../datos';
+import axios from 'axios';
 import ProductsList from '../components/ProductsList.vue';
 
 export default {
@@ -18,7 +20,7 @@ export default {
     },
     data() {
       return {
-        cartItems,
+        cartItems: [],
       }
     },
     computed: {
@@ -28,7 +30,22 @@ export default {
           0,
         );
       }
-    }
+    },
+    methods: {
+      async removeFromCart(productId) {
+        try {
+        const result = await axios.delete(`/api/users/12345/cart/${productId}`);
+        this.cartItems = result.data;
+  }     catch (error) {
+        console.error('Error removing item from cart:', error);
+  }
+}
+    },
+    async created() {
+      const result = await axios.get('/api/users/12345/cart');
+      const cartItems = result.data;
+      this.cartItems = cartItems;
+    },
 };
 </script>
 
