@@ -10,7 +10,7 @@ El objetivo de este proyecto era poner en practica lo aprendido en clase y/o uti
 #### RielesWeb
 [Pagina :link:](https://rielesweb.herokuapp.com/products)
 
-![Pagina: ](riel.png)
+![Pagina: ](riel.PNG)
 
 
 **Tambien se puede ver la pagina de esta merna**
