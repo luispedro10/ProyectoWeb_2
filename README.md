@@ -21,10 +21,10 @@ El objetivo de este proyecto era poner en practica lo aprendido en clase y/o uti
 4. `npm install -g @vue/cli`
 5. Entrar al folder del back-end
 6. `npm install express`
-7. `npm install --save-dev @babel/core @babel/node @babel/preset-env @babel/cli 
-8. `npm install @babel/runtime
-9. `npm install body-parser
-10. `npm install --save-dev nodemon
+7. `npm install --save-dev @babel/core @babel/node @babel/preset-env @babel/cli `
+8. `npm install @babel/runtime`
+9. `npm install body-parser`
+10. `npm install --save-dev nodemon`
 11. Y por ultimo
 12. `npm run dev`
 13. Eso abrira un localhost, y ahi se puede ver
