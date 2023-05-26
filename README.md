@@ -2,8 +2,6 @@
 
 El objetivo de este proyecto era poner en practica lo aprendido en clase y/o utilizar una tecnologia nueva que no hayamos visto para aprender sobre ella. En este proyecto se usaron tecnologías como: Vue.js, MongoDB, Axios, Express, Babel, MongoDB Atlas y Heroku, entre otro.
 
-### [Tutorial Vue :link:](https://www.youtube.com/watch?v=Gb066FcOufU)
-
 ### Autores:
 - Luis García [@luispedro10](https://github.com/luispedro10)
 - Andres Paiz [@andreluchi](https://github.com/andreluchi)
